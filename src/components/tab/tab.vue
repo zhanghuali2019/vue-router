@@ -1,13 +1,13 @@
 <template>
-    <el-menu default-active="2" @open="handleOpen" @close="handleClose" background-color="#001529" text-color="#697681" active-text-color="#fff">
+    <el-menu default-active="2" @open="handleOpen" @close="handleClose" background-color="#001529git" text-color="#697681" active-text-color="#fff">
       <el-submenu v-for = "(item, index) in items" :key="index" :index="item.index">
         <template slot="title" class="left">
           <i :class="item.mark"></i>
           <span>{{item.title}}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item v-for = "(a, index) in item.text" :key="index" :index="a.index" style="background: black">
-            <router-link tag="span" :to="a.to">{{a.txt}}</router-link>
+          <el-menu-item v-for = "(a, index) in item.text" :key="index" :index="a.index" style="background: black" class="aa" @mouseleave="bg">
+            <router-link tag="li" :to="a.to">{{a.txt}}</router-link>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -180,6 +180,11 @@ export default {
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
+    },
+    bg () {
+      var ele = document.getElementsByClassName('aa')[0]
+      ele.style.backgroundColor = 'black'
+      ele.style.color = '#697681'
     }
   }
 }
@@ -193,5 +198,12 @@ export default {
   }
   .el-menu{
     border:none;
+  }
+  .aa:hover{
+    background: black !important;
+    color:white !important;
+  }
+  .aa:focus {
+    background: blue !important;
   }
 </style>

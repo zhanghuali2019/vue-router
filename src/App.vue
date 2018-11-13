@@ -38,7 +38,6 @@ html{
 }
 body,#app{
   width:100%;
-  background:greenyellow;
 }
 .right{
   flex-grow:4;
