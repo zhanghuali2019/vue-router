@@ -7,7 +7,9 @@
       </div>
     </div>
     <div class="right">
-      <div class="right-top"></div>
+      <div class="right-top">
+        <poo></poo>
+      </div>
       <router-view></router-view>
     </div>
   </div>
@@ -15,9 +17,11 @@
 
 <script>
 import Tab from './components/tab/tab'
+import Poo from './components/head/head'
 export default {
   components: {
-    Tab
+    Tab,
+    Poo
   }
 }
 </script>
@@ -28,34 +32,35 @@ export default {
   margin:0;
   box-sizing: border-box;
 }
-body,#app{
+html{
   width:100%;
   height:100%;
+}
+body,#app{
+  width:100%;
   background:greenyellow;
 }
 .right{
-  width:80%;
-  flex:4;
-  height:1000px;
+  flex-grow:4;
 }
 .left{
-  width:20%;
-  flex:1;
-  height:100%;
+  width:200px;
   background: #001529;
+  overflow: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  align-content: stretch;
   display:flex;
-  background:pink;
+  background: #F0F2F5;
 }
   .right-top{
     height:56px;
     width:100%;
     background: red;
+    overflow: hidden;
   }
   .left-top{
     height:56px;

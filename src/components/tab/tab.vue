@@ -7,12 +7,11 @@
         </template>
         <el-menu-item-group>
           <el-menu-item v-for = "(a, index) in item.text" :key="index" :index="a.index" style="background: black">
-            <router-link tag="li" :to="a.to">{{a.txt}}</router-link>
+            <router-link tag="span" :to="a.to">{{a.txt}}</router-link>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
-
 </template>
 
 <script type="text/ecmascript-6">
@@ -187,4 +186,12 @@ export default {
 </script>
 
 <style scoped>
+  .el-menu-item{
+    padding:0;
+    width:100%;
+    box-sizing: border-box;
+  }
+  .el-menu{
+    border:none;
+  }
 </style>
