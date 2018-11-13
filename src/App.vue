@@ -2,7 +2,9 @@
   <div id="app">
     <div class="left">
       <div class="left-top"></div>
-      <tab></tab>
+      <div>
+        <tab></tab>
+      </div>
     </div>
     <div class="right">
       <div class="right-top"></div>
@@ -28,22 +30,27 @@ export default {
 }
 body,#app{
   width:100%;
+  height:100%;
+  background:greenyellow;
 }
 .right{
   width:80%;
-  float:right;
+  flex:4;
   height:1000px;
 }
 .left{
   width:20%;
-  float:left;
+  flex:1;
+  height:100%;
+  background: #001529;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  display:flex;
+  background:pink;
 }
   .right-top{
     height:56px;
@@ -54,5 +61,6 @@ body,#app{
     height:56px;
     width:100%;
     background: #002140;
+    overflow: hidden;
   }
 </style>
