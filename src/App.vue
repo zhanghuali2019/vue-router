@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <div class="left">
+      <div class="left-top"></div>
       <tab></tab>
     </div>
     <div class="right">
+      <div class="right-top"></div>
       <router-view></router-view>
     </div>
   </div>
@@ -43,4 +45,14 @@ body,#app{
   text-align: center;
   color: #2c3e50;
 }
+  .right-top{
+    height:56px;
+    width:100%;
+    background: red;
+  }
+  .left-top{
+    height:56px;
+    width:100%;
+    background: #002140;
+  }
 </style>

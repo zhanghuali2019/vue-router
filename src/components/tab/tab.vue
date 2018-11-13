@@ -1,93 +1,150 @@
 <template>
-  <ul class="tab" ref="">
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-time"></span><span class="tab-link">Dashborad</span><i class="icon-down el-icon-arrow-up"></i>
-      <ul class="tab-child" style="display:block" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/dashboard1">分析页</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/dashboard2">监控页</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/dashboard3">工作台</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-edit-outline"></span><span class="tab-link">表单页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/menu1">基础表单</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/menu2">分步表单</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/menu3">高级表单</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-tickets"></span><span class="tab-link">列表页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/list1">查询表格</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/list2">标准列表</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/list3">卡片列表</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/list4">搜索列表</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-document"></span><span class="tab-link">详情页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/detail1">基础详情页</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/detail2">高级详情页</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-success"></span><span class="tab-link">结果页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/result1">成功页</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/result2">失败页</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-circle-close"></span><span class="tab-link">异常页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/abnormal1">403</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/abnormal2">404</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/abnormal3">500</router-link>
-      </ul>
-    </li>
-    <li class="tab-item tabItem" @click="LiClick">
-      <span class="icon el-icon-star-on"></span><span class="tab-link">个人主页</span><i class="icon-down el-icon-arrow-down"></i>
-      <ul class="tab-child" @click.stop>
-        <router-link tag="li" class="tab-item tab-item-child" to="/personal1">个人中心</router-link>
-        <router-link tag="li" class="tab-item tab-item-child" to="/personal2">个人设置</router-link>
-      </ul>
-    </li>
-  </ul>
+  <el-menu class="tab">
+    <el-submenu class="tab-item tabItem" v-for = "(item, index) in items" :key="index">
+      <template slot="title">
+        <span class="icon" :class="item.mark"></span><span class="tab-link">{{item.title}}</span>
+      </template>
+      <transition name="el-zoom-in-top">
+        <el-menu class="tab-child" @click.stop>
+          <router-link tag="li" v-for = "(a, index) in item.text" :key="index" class="tab-item tab-item-child" :to="a.to">{{a.txt}}</router-link>
+        </el-menu>
+      </transition>
+    </el-submenu>
+  </el-menu>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  methods: {
-    LiClick (e) {
-      var item = document.getElementsByClassName('tab-child')
-      if (e.target !== 'li' && e.target.parentElement.parentElement.className === 'tab') {
-        if (e.target.parentElement.children[3].style.display === 'none') {
-          for (var i = 0; i < item.length; i++) {
-            item[i].style.display = 'none'
-            item[i].parentElement.children[2].className = 'el-icon-arrow-down icon-down'
-          }
-          e.target.parentElement.children[3].style.display = 'block'
-          e.target.parentElement.children[2].className = 'el-icon-arrow-up icon-down'
-        } else {
-          e.target.parentElement.children[3].style.display = 'none'
-          e.target.parentElement.children[2].className = 'el-icon-arrow-down icon-down'
+  data: function () {
+    return {
+      items: [
+        {
+          mark: 'el-icon-time',
+          title: 'Dashboard',
+          upDown: 'el-icon-arrow-up',
+          show: true,
+          text: [
+            {
+              txt: '分析页',
+              to: '/dashboard1'
+            },
+            {
+              txt: '监控页',
+              to: '/dashboard2'
+            },
+            {
+              txt: '工作台',
+              to: '/dashboard3'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-edit-outline',
+          title: '表单页',
+          upDown: 'el-icon-arrow-up',
+          text: [
+            {
+              txt: '基础表单页',
+              to: '/menu1'
+            },
+            {
+              txt: '分布表单页',
+              to: '/menu2'
+            },
+            {
+              txt: '高级表单页',
+              to: '/menu3'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-document',
+          title: 'Dashboard',
+          upDown: 'el-icon-arrow-up',
+          text: [
+            {
+              txt: '查询表格页',
+              to: '/list1'
+            },
+            {
+              txt: '标准列表',
+              to: '/list2'
+            },
+            {
+              txt: '卡片列表',
+              to: '/list3'
+            },
+            {
+              txt: '搜索列表',
+              to: '/list4'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-tickets',
+          title: '详情页',
+          upDown: 'el-icon-arrow-up',
+          text: [
+            {
+              txt: '基础详情页',
+              to: '/detail1'
+            },
+            {
+              txt: '高级详情页',
+              to: '/detail2'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-check',
+          title: '结果页',
+          upDown: 'el-icon-arrow-up',
+          text: [
+            {
+              txt: '成功页',
+              to: '/dashboard1'
+            },
+            {
+              txt: '失败页',
+              to: '/dashboard2'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-circle-close',
+          title: '异常页',
+          upDown: 'el-icon-arrow-up',
+          text: [
+            {
+              txt: '403',
+              to: '/abnormal1'
+            },
+            {
+              txt: '404',
+              to: '/abnormal1'
+            },
+            {
+              txt: '500',
+              to: '/abnormal1'
+            }
+          ]
+        },
+        {
+          mark: 'el-icon-star-off',
+          title: '个人页',
+          upDown: 'el-icon-arrow-down',
+          text: [
+            {
+              txt: '个人中心',
+              to: '/dashboard1'
+            },
+            {
+              txt: '个人设置',
+              to: '/dashboard2'
+            }
+          ]
         }
-      } else {
-        console.log(e.target)
-        if (e.target.children[3].style.display === 'none') {
-          for (var j = 0; j < item.length; j++) {
-            item[j].style.display = 'none'
-            item[j].parentElement.children[2].className = 'el-icon-arrow-down icon-down'
-          }
-          e.target.children[3].style.display = 'block'
-          e.target.children[2].className = 'el-icon-arrow-up icon-down'
-        } else {
-          e.target.children[3].style.display = 'none'
-          e.target.children[2].className = 'el-icon-arrow-down icon-down'
-        }
-      }
+      ]
     }
   }
 }
@@ -97,23 +154,27 @@ export default {
   .tab{
     width:100%;
     height:100%;
-    background: #030307;
+    background: #001529;
     float:left;
+  }
+  .tabItem{
+    color:#697681
+  }
+  .tabItem:hover{
+    color:white;
   }
   .icon{
     padding:0 10px 0 10px;
+    color: #697681;
   }
   .tab-link{
-    width:65%;
-  }
-  .icon-down{
-    float:right;
+    color: #697681;
   }
   .tab-item{
     width:100%;
     height:auto;
     color: #d3d3d3;
-    padding:10px 0;
+    padding: 0;
     text-align:left;
     display:block;
   }
@@ -124,8 +185,11 @@ export default {
   .tab-item-child{
     padding:10px 0 10px 30px;
   }
+  .tab-item-child:hover {
+    background: blue;
+  }
   .tab-child{
-    display:none;
+    background: #000000;
   }
   ul,li{
     list-style: none;
